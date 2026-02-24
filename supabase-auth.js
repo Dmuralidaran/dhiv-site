@@ -1,13 +1,16 @@
 // ====== Configure Supabase ======
 const SUPABASE_URL = "https://qyaymudqiosbutaudhux.supabase.co";
 const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InF5YXltdWRxaW9zYnV0YXVkaHV4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE5NTY5NzYsImV4cCI6MjA4NzUzMjk3Nn0.tivHA2aId6gqRN4XVQfIKUh8BQ-fMbSCOg8Y9RTxAe0";
-const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+const supabaseClient = window.supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_ANON_KEY
+);
 
 function $(id) { return document.getElementById(id); }
 function isPage(name) { return window.location.pathname.endsWith(name); }
 
 async function redirectIfNeeded() {
-  const { data: { session } } = await supabase.auth.getSession();
+  const { data: { session } } = await supabaseClient.auth.getSession();
 
   // Protect dashboard
   if (isPage("dashboard.html") && !session) {
@@ -45,7 +48,7 @@ async function setupLoginPage() {
     const email = $("email").value.trim();
     const password = $("password").value;
 
-    const { error } = await supabase.auth.signInWithPassword({ email, password });
+    const { error } = await supabaseClient.auth.signInWithPassword({ email, password });
     if (error) {
       msg.textContent = error.message;
       return;
@@ -59,7 +62,7 @@ async function setupLoginPage() {
     const email = $("email").value.trim();
     const password = $("password").value;
 
-    const { error } = await supabase.auth.signUp({ email, password });
+    const { error } = await supabaseClient.auth.signUp({ email, password });
     if (error) {
       msg.textContent = error.message;
       return;
@@ -78,7 +81,7 @@ async function setupLoginPage() {
     msg.textContent = "Sending password reset email…";
 
     // IMPORTANT: Set your redirect URL in Supabase Auth settings if needed
-    const { error } = await supabase.auth.resetPasswordForEmail(email, {
+    const { error } = await supabaseClient.auth.resetPasswordForEmail(email, {
       redirectTo: `${window.location.origin}${window.location.pathname.replace("login.html", "login.html")}`
     });
 
@@ -95,7 +98,7 @@ async function setupLogout() {
   if (!btn) return;
 
   btn.addEventListener("click", async () => {
-    await supabase.auth.signOut();
+    await supabaseClient.auth.signOut();
     window.location.href = "login.html";
   });
 }
@@ -106,7 +109,8 @@ setupLoginPage();
 setupLogout();
 
 // Optional: react to auth changes
-supabase.auth.onAuthStateChange((_event, _session) => {
+supabaseClient.auth.onAuthStateChange((_event, _session) => {
   // Keep it simple: rely on redirectIfNeeded when pages load.
 
 });
+
