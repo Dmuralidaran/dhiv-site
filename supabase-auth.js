@@ -108,4 +108,5 @@ setupLogout();
 // Optional: react to auth changes
 supabase.auth.onAuthStateChange((_event, _session) => {
   // Keep it simple: rely on redirectIfNeeded when pages load.
+
 });
