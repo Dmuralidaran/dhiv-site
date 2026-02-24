@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Login — dhiv</title>
+  <meta name="description" content="Sign in to your dhiv relocation dashboard." />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="header">
+    <div class="container header__inner">
+      <a class="brand" href="index.html"><span class="brand__mark">dhiv</span></a>
+      <a class="btn btn--ghost" href="index.html">Back to site</a>
+    </div>
+  </header>
+
+  <main class="section">
+    <div class="container" style="max-width:540px;">
+      <h1>Sign in</h1>
+      <p class="muted">Access your relocation dashboard.</p>
+
+      <div class="card" style="padding:18px;">
+        <form id="authForm">
+          <div class="form-row">
+            <label for="email">Email</label>
+            <input id="email" type="email" autocomplete="email" required />
+          </div>
+
+          <div class="form-row">
+            <label for="password">Password</label>
+            <input id="password" type="password" minlength="6" autocomplete="current-password" required />
+          </div>
+
+          <button class="btn btn--primary w100" type="submit" id="loginBtn">Sign in</button>
+
+          <div style="display:flex; gap:10px; margin-top:10px; flex-wrap:wrap;">
+            <button class="btn btn--ghost" type="button" id="signupBtn">Create account</button>
+            <button class="btn btn--ghost" type="button" id="resetBtn">Forgot password</button>
+          </div>
+
+          <p class="form-help" id="msg" aria-live="polite" style="margin-top:10px;"></p>
+        </form>
+      </div>
+
+      <p class="muted" style="margin-top:12px; font-size:14px;">
+        Note: You may need to confirm your email depending on your Supabase auth settings.
+      </p>
+    </div>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabase-auth.js"></script>
+</body>
+</html>

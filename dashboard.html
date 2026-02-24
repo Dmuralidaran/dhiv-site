@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Dashboard — dhiv</title>
+  <meta name="description" content="Your dhiv relocation dashboard." />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="header">
+    <div class="container header__inner">
+      <a class="brand" href="index.html"><span class="brand__mark">dhiv</span></a>
+      <div style="display:flex; gap:10px; align-items:center;">
+        <a class="btn btn--ghost" href="index.html">Home</a>
+        <button class="btn btn--ghost" id="logoutBtn">Logout</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="section">
+    <div class="container">
+      <h1>Your Dashboard</h1>
+      <p class="muted" id="userLine">Loading…</p>
+
+      <div class="grid grid--3" style="margin-top:16px;">
+        <article class="card">
+          <h3>Relocation Checklist</h3>
+          <p class="muted">We can store checklist items per user in Supabase (next step).</p>
+        </article>
+        <article class="card">
+          <h3>Documents</h3>
+          <p class="muted">We can add secure uploads using Supabase Storage.</p>
+        </article>
+        <article class="card">
+          <h3>Appointments</h3>
+          <p class="muted">Track BSN / municipality / banking steps.</p>
+        </article>
+      </div>
+    </div>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabase-auth.js"></script>
+</body>
+</html>
